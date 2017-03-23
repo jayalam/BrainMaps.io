@@ -1,0 +1,31 @@
+{
+  "name": "brainmaps.io",
+  "version": "1.0.0",
+  "description": "Entwicklung und Evaluation einer Webbasierten Benutzer-Schnittstelle, für das Suchen und Navigieren in Graph-Daten von Kompetenzen Frameworks",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayalam/BrainMaps.io.git"
+  },
+  "author": "Jorge Ayala M.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayalam/BrainMaps.io/issues"
+  },
+  "homepage": "https://github.com/jayalam/BrainMaps.io#readme",
+  "dependencies": {
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  }
+}

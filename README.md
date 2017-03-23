@@ -2,5 +2,5 @@
 
 run with:
 ```
-npm start
+npm run dev
 ```

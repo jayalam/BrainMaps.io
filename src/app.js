@@ -3,20 +3,39 @@
  */
 
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './app.css';
+import SearchBar from './SearchBar';
+import Chart from './Chart';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {percentComplete: 0.3};
+        this.togglePercent = this.togglePercent.bind(this);
+    }
+
+    togglePercent() {
+        const percentage = this.state.percentComplete === 0.3 ? 0.7 : 0.3;
+        this.setState({percentComplete: percentage});
+    }
+
     render() {
+        var data = [
+            { apples: 53245, oranges:	200 },
+            { apples: 28479, oranges:	200 },
+            { apples: 19697, oranges:	200 },
+            { apples: 24037, oranges:	200 },
+            { apples: 40245, oranges:	200 }
+        ];
+
         return (
-            <div className="App">
+            <div>
                 <div className="App-header">
-                    <h2>Welcome to React</h2>
-                    <img src={logo} className="App-logo" alt="logo" />
+                    Welcome to BrainMaps.io the Search UI for Competency Frameworks!
                 </div>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+
+                <SearchBar />
+
+                <Chart data={data} />
 
             </div>
         );

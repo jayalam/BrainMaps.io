@@ -4,9 +4,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
 import './app.css';
-import Menu from './menu';
+import App from './app';
 
 ReactDOM.render(
     <App />,

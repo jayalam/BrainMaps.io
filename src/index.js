@@ -10,8 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 // TODO : check why the search is not working with limit and offset!!!!
-let url = 'http://lello.blopez.ec:9090/api/v1.0/competences/?top=true';
-// let url = 'http://lello.blopez.ec:9090/api/v1.0/competences/search/service';
+// let url = 'http://lello.blopez.ec:9090/api/v1.0/competences/bca6344d-3e9b-4193-b37b-b0e6e009aed2';
+// let url = 'http://lello.blopez.ec:9090/api/v1.0/competences/?top=true';
+let url = 'http://lello.blopez.ec:9090/api/v1.0/competences/search/Cisco Data Centre';
 
 let listItems = {};
 
@@ -34,7 +35,11 @@ const api_get = (url) => {
                     <div className="d-flex w-100 justify-content-between">
                         <h4 className="mb-1">{item.name.en}</h4>
                     </div>
-                    <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    {item.definition.en ? (
+                        <p className="mb-1">{item.definition.en}</p>
+                    ): (
+                        null
+                    )}
 
 
 
@@ -75,7 +80,7 @@ const apiReducer = (state = [], action) => {
     }
 };
 
-const Counter = ({
+const Index = ({
     value,
     getAPI,
     clear
@@ -123,7 +128,7 @@ const store = createStore(apiReducer);
 
 const render = () => {
     ReactDOM.render(
-        <Counter
+        <Index
             value={ store.getState() }
             getAPI={ () =>
                 store.dispatch({

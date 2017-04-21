@@ -1,10 +1,11 @@
 /**
  * Created by jorgeayala on 21/04/2017.
  */
+import {ITEMS_HAS_ERRORED, ITEMS_IS_LOADING, ITEMS_FETCH_DATA_SUCCESS, RESET_ITEMS, SELECT_ITEM} from '../actions/items';
 
 export function itemsHasErrored(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_HAS_ERRORED':
+        case ITEMS_HAS_ERRORED:
             return action.hasErrored;
         default:
             return state;
@@ -13,7 +14,7 @@ export function itemsHasErrored(state = false, action) {
 
 export function itemsIsLoading(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_IS_LOADING':
+        case ITEMS_IS_LOADING:
             return action.isLoading;
         default:
             return state;
@@ -22,9 +23,22 @@ export function itemsIsLoading(state = false, action) {
 
 export function items(state = [], action) {
     switch (action.type) {
-        case 'ITEMS_FETCH_DATA_SUCCESS':
+        case ITEMS_FETCH_DATA_SUCCESS:
             return action.items;
+            break;
+        case RESET_ITEMS:
+            return [];
+            break;
         default:
             return state;
+    }
+}
+export function selectedItem(state ={}, action) {
+    switch (action.type) {
+        case SELECT_ITEM:
+            console.log("selection",action.item);
+            return {...action.item};
+            break;
+        default : return {...state}
     }
 }

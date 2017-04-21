@@ -4,14 +4,79 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../actions/items';
+import { selectItem } from '../actions/items';
+import { bindActionCreators } from "redux";
+import { Modal, Button } from 'react-bootstrap'
 
-import Modal from './Modal';
+
+function renderRelatedList(related_items) {
+    if (related_items.length > 0) {
+        return related_items.map((item, index) => (
+            <RelatedList key={index} item={item} />
+        ));
+    }
+    else return [];
+}
+
+const RelatedList = ({item}) => {
+    return (
+        <div>
+            <li key={item.code}>
+                <strong>externalUri:</strong> {item.externalUri}
+            </li>
+        </div>
+    );
+};
 
 class ItemList extends Component {
-    componentDidMount() {
-        // this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-        // this.props.fetchData('http://lello.blopez.ec:9090/api/v1.0/competences');
+    constructor(props){
+        super(props);
+        this._onItemClick = this._onItemClick.bind(this);
+        this.state = {
+            selectedItem : null,
+            visible : false
+        }
+    }
+
+    _onItemClick(item){
+        console.log('selecting', item);
+        this.setState({selectedItem:item, visible: true});
+    }
+    _renderModal(){
+
+        if (!this.state.selectedItem) return;
+        const hide = () => this.setState({visible : false});
+        const related_items = renderRelatedList(this.state.selectedItem.related);
+        return(
+            <Modal show={this.state.visible} onHide={hide}>
+                {/*<Modal.Title>  {this.state.selectedItem.code} </Modal.Title>*/}
+
+
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title">Selected Competence</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <span><strong>Name:</strong> {this.state.selectedItem.name.en}</span><br/>
+                    <span><strong>Description:</strong> {this.state.selectedItem.definition.en}</span><br/>
+                    <span><strong>Id:</strong> {this.state.selectedItem['@id']}</span><br/>
+                    <span><strong>Code:</strong> {this.state.selectedItem.code}</span><br/>
+                    <span><strong>framework:</strong> {this.state.selectedItem.framework}</span><br/>
+
+                    {this.state.selectedItem.related.length ? (
+                        <span><strong>Related:</strong></span>
+                    ):(null)}
+                    <ul>
+                        { related_items }
+                    </ul>
+
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={hide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        )
     }
 
     render() {
@@ -25,11 +90,11 @@ class ItemList extends Component {
 
         return (
             <div className="list-group">
-                {/*<Modal />*/}
+                {this._renderModal()}
                 {this.props.items.map((item) => (
 
 
-                        <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                        <a key={item.code} onClick={()=>this._onItemClick(item)} className="list-group-item list-group-item-action flex-column align-items-start">
                             <div className="d-flex w-100 justify-content-between">
                                 {item.name.en ? (
                                     <h4 className="mb-1"><strong>Name:</strong><br/>{item.name.en}</h4>
@@ -57,7 +122,6 @@ class ItemList extends Component {
 }
 
 ItemList.propTypes = {
-    fetchData: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
     hasErrored: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired
@@ -72,9 +136,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
-    };
+    return bindActionCreators({selectItem},dispatch)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);

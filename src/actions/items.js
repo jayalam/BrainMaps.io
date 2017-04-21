@@ -29,8 +29,14 @@ export function itemsFetchData(url) {
         dispatch(itemsIsLoading(true));
 
         let listItems = {};
+        var options = {
+            url: url,
+            headers: {
+                'Accept-Language': 'en'
+            }
+        };
         // let url_request = 'http://lello.blopez.ec:9090/api/v1.0/competences?limit=5';
-        request(url, (error, response, body) => {
+        request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 dispatch(itemsIsLoading(false));
 

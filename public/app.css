@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 5em !important;
+}
+
+.col-lg-10 {
+    text-align: center;
+    width: 100% !important;
+}
+
+.list-group {
+    margin-top: 10% !important;
+    text-align: center;
+}
+
+.list-group-item:nth-child(2n) {
+    background-color: #DEDEDE;
+}
+
+
+.form-horizontal {
+    width: 100% !important;
+}
+
+.wrapperBtn {
+    text-align: center;
+    margin-top: 1%;
+}

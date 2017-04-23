@@ -2,57 +2,102 @@
  * Created by jorgeayala on 23/04/2017.
  */
 
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { selectItem } from '../../actions/items';
+import { bindActionCreators } from "redux";
 import Chart from 'd3act';
 
-class ExampleBubbleChart extends React.Component {
-
+class ExampleBubbleChart extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            data: {
-                children: [
-                    { name: "Alaa", value: 1 },
-                    { name: "Zaid", value: 1 },
-                    { name: "Kareem", value: 2 },
-                    { name: "Mahmoud", value: 1 },
-                    { name: "Tariq", value: 1 },
-                    { name: "Shareef", value: 1 },
-                    { name: "Tom", value: 41 },
-                    { name: "Forest", value: 2 },
-                    { name: "John", value: 84 },
-                    { name: "Alex", value: 11 },
-                    { name: "Donald", value: 7 },
-                    { name: "Mark", value: 29 },
-                    { name: "Charles", value: 20 },
-                    { name: "Quincy", value: 5 },
-                    { name: "Alvan", value: 1 },
-                    { name: "Don", value: 32 },
-                    { name: "Hassan", value: 2 },
-                    { name: "Jordan", value: 8 },
-                    { name: "Michael", value: 32 },
-                    { name: "Steven", value: 5 },
-                    { name: "Rafael", value: 2 },
-                    { name: "Rick", value: 12 },
-                ]
-            }
+            selectedItem : null,
+            visible: false
         }
     }
 
+    // create(data) {
+    //     console.log('CREATED CHART with data : ', data);
+    //     // Create your chart
+    // }
+    //
+    // update(data) {
+    //     console.log('UPDATED CHART with data : ', data);
+    //     // Update your chart
+    //     // this.setState({data});
+    // }
+    //
+    // unmount() {
+    //     console.log('UNMOUNTED CHART');
+    //     this.el.remove();
+    // }
+
+    // componentWillReceiveProps(data){
+    //     // this.setState(this.props.items);
+    //     // console.log('componentWillReceiveProps', data);
+    //     this.setState(data);
+    // }
+
     render () {
+
+        if (this.props.hasErrored) {
+            return <p>Sorry! There was an error loading the items</p>;
+        }
+
+        if (this.props.isLoading) {
+            return <p>Loading…</p>;
+        }
+
+        if (this.props.items.length === 0) return null;
+
+
+        let data = {
+            children: []
+        };
+
+        data.children = this.props.items.map((item, i) => {
+            let x = {
+                name: item.name.en,
+                value: 100 - i,
+                description: item.definition.en
+            };
+            return x;
+        });
+
+        console.log('data : ', data.children[0].name);
+
+
         return (
             <div>
-                <h2>Bubble Chart</h2>
                 <Chart
                     type={"bubble"}
                     diameter={500}
                     showTooltips={true}
-                    data={this.state.data}
+                    data={data}
                 />
             </div>
         );
     }
 }
 
-export default ExampleBubbleChart;
+ExampleBubbleChart.propTypes = {
+    items: PropTypes.array,
+    hasErrored: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => {
+    return {
+        items: state.items,
+        hasErrored: state.itemsHasErrored,
+        isLoading: state.itemsIsLoading,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({},dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExampleBubbleChart);

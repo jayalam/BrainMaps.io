@@ -22,7 +22,7 @@ const RelatedList = ({item}) => {
     return (
         <div>
             <li key={item.code}>
-                <strong>externalUri:</strong> {item.externalUri}
+                <strong>externalUri:</strong> <a href={item.externalUri} target="_blank">{item.externalUri}</a>
             </li>
         </div>
     );
@@ -58,7 +58,7 @@ class ItemList extends Component {
                 <Modal.Body>
                     <span><strong>Name:</strong> {this.state.selectedItem.name.en}</span><br/>
                     <span><strong>Description:</strong> {this.state.selectedItem.definition.en}</span><br/>
-                    <span><strong>Id:</strong> {this.state.selectedItem['@id']}</span><br/>
+                    <span><strong>Id:</strong> <a href={this.state.selectedItem['@id']} target="_blank">{this.state.selectedItem['@id']}</a></span><br/>
                     <span><strong>Code:</strong> {this.state.selectedItem.code}</span><br/>
                     <span><strong>framework:</strong> {this.state.selectedItem.framework}</span><br/>
 

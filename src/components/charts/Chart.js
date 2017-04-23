@@ -4,7 +4,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectItem } from '../../actions/items';
 import { bindActionCreators } from "redux";
 import Chart from 'd3act';
 
@@ -17,28 +16,6 @@ class ExampleBubbleChart extends Component {
             visible: false
         }
     }
-
-    // create(data) {
-    //     console.log('CREATED CHART with data : ', data);
-    //     // Create your chart
-    // }
-    //
-    // update(data) {
-    //     console.log('UPDATED CHART with data : ', data);
-    //     // Update your chart
-    //     // this.setState({data});
-    // }
-    //
-    // unmount() {
-    //     console.log('UNMOUNTED CHART');
-    //     this.el.remove();
-    // }
-
-    // componentWillReceiveProps(data){
-    //     // this.setState(this.props.items);
-    //     // console.log('componentWillReceiveProps', data);
-    //     this.setState(data);
-    // }
 
     render () {
 
@@ -68,12 +45,11 @@ class ExampleBubbleChart extends Component {
 
         console.log('data : ', data.children[0].name);
 
-
         return (
             <div>
                 <Chart
                     type={"bubble"}
-                    diameter={500}
+                    diameter={window.innerWidth}
                     showTooltips={true}
                     data={data}
                 />

@@ -21,9 +21,9 @@
   "homepage": "https://github.com/jayalam/BrainMaps.io#readme",
   "dependencies": {
     "bootstrap": "3.3.7",
-    "d3": "4.7.3",
+    "d3act": "3.1.0",
     "react": "15.4.2",
-    "react-bootstrap": "^0.30.10",
+    "react-bootstrap": "0.30.10",
     "react-dom": "15.4.2",
     "react-redux": "5.0.3",
     "react-router-dom": "4.1.1",

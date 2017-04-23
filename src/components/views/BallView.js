@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 
 import Top from '../IndexHTMLTop';
-// import BallViewChart from '../charts/BallViewChart';
+import BallViewChart from '../charts/BallViewChart';
 // import Chart from '../charts/Chart';
 
 var sampleData = [
@@ -34,6 +34,7 @@ class BallView extends Component {
 
                 add BallViewCharts!!!
 
+                <BallViewChart/>
                 {/*<BallViewChart*/}
                     {/*data={this.state.data}*/}
                     {/*domain={this.state.domain}*/}

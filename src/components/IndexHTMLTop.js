@@ -4,11 +4,10 @@
 
 import React, { Component } from 'react';
 
+import RoutingBar from './RoutingBar';
 import SearchBar from './SearchBar';
-import ItemList from './ItemList';
 
-
-class IndexHTML extends Component {
+class IndexHTMLTop extends Component {
     render() {
         return (
             <div id="wrapper">
@@ -17,15 +16,12 @@ class IndexHTML extends Component {
                     Welcome to BrainMaps.io the Search Engine for Compentencies!
                 </p>
 
+                <RoutingBar />
+
                 <SearchBar />
-
-                <br/>
-
-                <ItemList />
-
             </div>
         );
     }
 }
 
-export default (IndexHTML);
+export default IndexHTMLTop;

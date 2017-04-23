@@ -92,8 +92,6 @@ class ItemList extends Component {
             <div className="list-group">
                 {this._renderModal()}
                 {this.props.items.map((item) => (
-
-
                         <a key={item.code} onClick={()=>this._onItemClick(item)} className="list-group-item list-group-item-action flex-column align-items-start">
                             <div className="d-flex w-100 justify-content-between">
                                 {item.name.en ? (
@@ -105,19 +103,14 @@ class ItemList extends Component {
                             {item.definition.en ? (
                                 <p className="mb-1"><strong>Definition:</strong><br/>{item.definition.en}</p>
                             ): (
-                                <p>no definition provided</p>
+                                <p className="mb-1"><strong>Definition:</strong><br/>no definition provided</p>
                             )}
-
 
                             <p><strong>code:</strong><br/>{item.code}</p>
                         </a>
-
                 ))}
             </div>
-
-
-
-    );
+        );
     }
 }
 

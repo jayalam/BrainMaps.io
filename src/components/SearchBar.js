@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { itemsFetchData, resetItems } from "../actions/items";
 import { bindActionCreators } from "redux";
 
-
 class SearchBar extends Component {
     constructor(props){
         super(props);
@@ -36,11 +35,9 @@ class SearchBar extends Component {
 
     render() {
         return (
-
             <form onSubmit={e => {
                 e.preventDefault();
-            }}>
-
+            }} autoComplete="off">
                 <div className="col-sm-10 form-horizontal">
                     <input id="searchBar" className="form-control" type="text" placeholder="Search for..." onChange={this._onChange} value={this.state.searchString}/>
                     <div className="wrapperBtn">
